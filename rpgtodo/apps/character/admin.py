@@ -10,4 +10,4 @@ class CharacterAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('user', 'level', 'exp')
+    list_display = ('user', 'name', 'level', 'exp')

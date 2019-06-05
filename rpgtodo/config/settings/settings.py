@@ -25,13 +25,16 @@ SECRET_KEY = '1fbf+wx1kyp8k%l1+0otv%p4)l-_a)@a0hp=27vc+lp=ztz%t='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'rpgtodo.local'
+]
 
 
 # Application definition
 MY_APPS = [
     'apps.character',
-    'apps.missions'
+    'apps.missions',
+    'apps.habittracker',
 ]
 
 DJANGO_APPS = [
@@ -44,7 +47,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PART_APP = [
-
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS + THIRD_PART_APP
@@ -80,13 +83,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rpgtodo',
+        'HOST': 'localhost',
+        'PORT': '5433',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
     }
 }
 
